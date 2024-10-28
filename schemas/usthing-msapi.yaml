@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: USThing Main Service API
-  version: '1.0'
+  version: "1.0"
   description: API for USThing services including class enrollment and facility booking
 
 servers:
@@ -19,9 +19,9 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Success
-          
+
   /fbs/bookingInfo:
     get:
       summary: Get personal facility bookings
@@ -38,7 +38,7 @@ paths:
             type: string
             default: "01"
       responses:
-        '200':
+        "200":
           description: Success
 
   /fbs/facilityType:
@@ -57,7 +57,7 @@ paths:
             type: string
             default: "01"
       responses:
-        '200':
+        "200":
           description: Success
 
   /fbs/facilities:
@@ -76,7 +76,7 @@ paths:
             type: string
             default: "01"
       responses:
-        '200':
+        "200":
           description: Success
 
 components:

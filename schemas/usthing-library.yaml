@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: USThing Library API
-  version: '1.0'
+  version: "1.0"
   description: API for USThing library room reservation services
 
 servers:
@@ -11,10 +11,10 @@ servers:
 paths:
   /getInfo:
     get:
-      security: [] 
+      security: []
       summary: Get library areas and rooms
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
@@ -66,7 +66,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: Success
 
     delete:
@@ -79,7 +79,7 @@ paths:
             type: string
           description: Booking ID
       responses:
-        '200':
+        "200":
           description: Success
 
   /getSessionsByDay:
@@ -108,14 +108,14 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: Success
 
   /getMySchedule:
     get:
       summary: Get personal library room bookings
       responses:
-        '200':
+        "200":
           description: Success
 
 components:
