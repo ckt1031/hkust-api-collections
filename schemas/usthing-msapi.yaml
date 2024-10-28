@@ -1,0 +1,89 @@
+openapi: 3.1.0
+info:
+  title: USThing Main Service API
+  version: '1.0'
+  description: API for USThing services including class enrollment and facility booking
+
+servers:
+  - url: https://ms.api.usthing.xyz/v2
+    description: Main Service API
+
+paths:
+  /sis/stdt_class_enrl:
+    get:
+      summary: Get class enrollment information
+      parameters:
+        - name: userName
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          
+  /fbs/bookingInfo:
+    get:
+      summary: Get personal facility bookings
+      parameters:
+        - name: ustID
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: userType
+          in: query
+          required: true
+          schema:
+            type: string
+            default: "01"
+      responses:
+        '200':
+          description: Success
+
+  /fbs/facilityType:
+    get:
+      summary: Get facility types
+      parameters:
+        - name: ustID
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: userType
+          in: query
+          required: true
+          schema:
+            type: string
+            default: "01"
+      responses:
+        '200':
+          description: Success
+
+  /fbs/facilities:
+    get:
+      summary: Get facilities list
+      parameters:
+        - name: ustID
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: userType
+          in: query
+          required: true
+          schema:
+            type: string
+            default: "01"
+      responses:
+        '200':
+          description: Success
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+security:
+  - BearerAuth: []

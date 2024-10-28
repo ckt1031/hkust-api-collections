@@ -1,0 +1,128 @@
+openapi: 3.1.0
+info:
+  title: USThing Library API
+  version: '1.0'
+  description: API for USThing library room reservation services
+
+servers:
+  - url: https://library.api.usthing.xyz/v1
+    description: Library API
+
+paths:
+  /getInfo:
+    get:
+      security: [] 
+      summary: Get library areas and rooms
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /entry:
+    post:
+      summary: Book a library room
+      parameters:
+        - name: area
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: room
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: month
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: day
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: hour
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: min
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: duration
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success
+
+    delete:
+      summary: Cancel a library room booking
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Booking ID
+      responses:
+        '200':
+          description: Success
+
+  /getSessionsByDay:
+    get:
+      security: []
+      summary: Get library room availability for specific day
+      parameters:
+        - name: area
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: month
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: day
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success
+
+  /getMySchedule:
+    get:
+      summary: Get personal library room bookings
+      responses:
+        '200':
+          description: Success
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+security:
+  - BearerAuth: []
