@@ -8,6 +8,10 @@ Those API are not officially provided by HKUST, obtained with reverse engineerin
 
 We do **NOT** provide the way to obtain the ACCESS TOKEN publicly, you need to find your own way to get it.
 
+## Online Schemas in OpenAPI 3.1
+
+<https://ckt1031-hkust.apidocumentation.com>
+
 ## Access Token
 
 <!-- You can find me in school in person to get way of obtaining the access token. -->
