@@ -1,12 +1,138 @@
 openapi: 3.1.0
 info:
-  title: HKUST API
+  title: HKUST W5 AB API
   version: 1.0.0
 servers:
   - url: https://w5.ab.ust.hk/msapi
 security:
   - bearerAuth: []
 paths:
+  /sis/catg_course:
+    get:
+      summary: Obtain all courses, also with searching
+      tags:
+        - SIS
+      parameters:
+        - in: query
+          name: careerType
+          schema:
+            type: string
+          required: true
+          description: Level Type
+          example: "UG"
+
+        - in: query
+          name: keyWordSrch
+          schema:
+            type: string
+          required: true
+          description: Course Keyword
+          example: "COMP1021"
+
+  /sis/cq/class_quota:
+    get:
+      summary: Obtain all courses with quota of a specific semaster
+      tags:
+        - SIS
+      parameters:
+        - in: query
+          name: term
+          schema:
+            type: string
+          required: true
+          description: Term ID
+          example: "2410"
+        - in: query
+          name: crseCode
+          schema:
+            type: string
+          required: false
+          description: Course ID
+          example: "COMP2711"
+
+  /sis/stdt_ecard/users/%7BstdtID%7D/enrollment/cart_add:
+    post:
+      summary: Add course to shopping cart
+      tags:
+        - SIS
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                term:
+                  type: string
+                enrollments:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      classNbr:
+                        type: integer
+                      relClassNbr1:
+                        type: integer
+                      relClassNbr2:
+                        type: integer
+            example:
+              term: "2410"
+              enrollments:
+                - classNbr: 1234
+                  relClassNbr1: 1235
+                  relClassNbr2: 1236
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+              examples:
+                example:
+                  value:
+                    status: "success"
+
+  /sis/stdt_ecard/users/%7BstdtID%7D/enrollment/cart_list:
+    get:
+      summary: Get enrollment cart list
+      tags:
+        - SIS
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  terms:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        term:
+                          type: string
+                        termDesc:
+                          type: string
+                        enrollments:
+                          type: array
+                          items:
+                            type: object
+              example:
+                status: "200"
+                message: ""
+                terms:
+                  - term: "2410"
+                    termDesc: "2024-25 Fall"
+                    enrollments: []
+
   /token/request:
     post:
       summary: Request a temporary access token
@@ -408,6 +534,231 @@ paths:
                     data:
                       id: "someBookingId"
                       ical_uid: "someUID"
+
+  /fbs/facilitytype:
+    get:
+      summary: Get facility type information
+      tags:
+        - FBS
+      parameters:
+        - in: query
+          name: userType
+          schema:
+            type: string
+          required: true
+          description: User Type
+          example: "01"
+        - in: query
+          name: ustID
+          schema:
+            type: string
+          required: true
+          description: UST ID
+      responses:
+        "200":
+          description: Facility type info found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  message: { type: string }
+                  errorCode: { type: string }
+                  totalRecord: { type: integer }
+                  userType: { type: string }
+                  ustID: { type: string }
+                  emailAddr: { type: string }
+                  facilityTypeID: { type: string }
+                  facilityType:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        facilityTypeID: { type: string }
+                        facilityTypeName: { type: string }
+                        facilityID: { type: string }
+              examples: # Examples at the MediaType level
+                facilityTypeFound:
+                  value:
+                    status: "200"
+                    message: "Facility type info found"
+                    errorCode: ""
+                    totalRecord: 71
+                    userType: "01"
+                    ustID: "0000"
+                    emailAddr: " "
+                    facilityTypeID: " "
+                    facilityType:
+                      - facilityTypeID: "16"
+                        facilityTypeName: "Artificial-turf Soccer Pitch"
+                        facilityID: "40"
+                      # Add more example facility types here as needed
+
+  /sis/stdt_ecard/users/%7BstdtID%7D:
+    get:
+      summary: Get student eCard information
+      tags:
+        - Student
+      parameters:
+        - in: query
+          name: showPhoto
+          schema:
+            type: string
+            enum: [N, Y]
+          required: true
+          description: Show photo (N or Y)
+        - in: query
+          name: showPopupMsg
+          schema:
+            type: string
+            enum: [N, Y]
+          required: true
+          description: Show popup message (N or Y)
+        - in: query
+          name: showInboxMsg
+          schema:
+            type: string
+            enum: [N, Y]
+          required: true
+          description: Show inbox messages (N or Y)
+      responses:
+        "200":
+          description: Student eCard information found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  message: { type: string }
+                  errorCode: { type: string }
+                  stdtID: { type: string }
+                  lastName: { type: string }
+                  # ... (rest of the properties)
+                  inboxMsg: { type: array, items: {} } # Empty array for now
+              examples:
+                studentFound:
+                  value:
+                    status: "200"
+                    message: ""
+                    errorCode: ""
+                    stdtID: "0000"
+                    lastName: "CHAN"
+                    firstName: "Tai Man"
+                    fullName: "CHAN, Tai Man"
+                    chineseName: "陳"
+                    email: "yourmum@connect.ust.hk"
+                    barcode: ""
+                    qrcode: ""
+                    showBarcode: "N"
+                    showQRcode: "N"
+                    acadCareer: "UGRD"
+                    acadGroup: "SENG"
+                    acadOrg: "SENG"
+                    acadOrgShortDesc: "SENG"
+                    progStatus: "Active in Program"
+                    progName: "Bachelor Degree SENG: 4Y"
+                    ddProgName: "Bachelor Degree of Sussy Baka: 99Y"
+                    extMajName: "Extended Major of Sussy Baka: 99Y"
+                    yearOfStudy: "01"
+                    studyMode: "Full-Time"
+                    enableEcard: "Y"
+                    enableRegForm: "N"
+                    cardExpiryDate: "2050-01-01"
+                    privacyStatementUrl: "https://dataprivacy.ust.hk/university-data-privacy-policy-statement/"
+                    termsCondUrl: " "
+                    photo: "/91/..."
+                    popupMsg: null
+                    inboxMsg: []
+  /sis/stdt_terms:
+    get:
+      summary: Get student term information
+      tags:
+        - Student
+      parameters:
+        - in: query
+          name: stdtID
+          schema:
+            type: string
+          required: true
+          description: Student ID
+      responses:
+        "200":
+          description: Student term information found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  message: { type: string }
+                  errorCode: { type: string }
+                  totalRecord: { type: integer }
+                  offset: { type: integer }
+                  limit: { type: integer }
+                  userName: { type: string }
+                  stdtID: { type: string }
+                  acadCareer: { type: string }
+                  stdtCareerNbr: { type: integer }
+                  stdtInfo: { type: array, items: { type: object, properties: {
+                              stdtID: { type: string },
+                              acadCareer: { type: string },
+                              stdtCareerNbr: { type: integer },
+                              schoolCode: { type: string },
+                              # ... (other properties within stdtInfo)
+                              stdtTerm:
+                                {
+                                  type: array,
+                                  items: { type: object, properties: {
+                                          termCode: { type: string },
+                                          # ... (other properties within stdtTerm)
+                                        } },
+                                },
+                            } } }
+              examples:
+                termsFound:
+                  value:
+                    status: "200"
+                    message: "Student term found"
+                    errorCode: " "
+                    totalRecord: 1
+                    offset: 0
+                    limit: 1000
+                    userName: " "
+                    stdtID: "0000"
+                    acadCareer: " "
+                    stdtCareerNbr: -1
+                    stdtInfo:
+                      - stdtID: "0000"
+                        acadCareer: "UGRD"
+                        stdtCareerNbr: 0
+                        schoolCode: "SENG"
+                        deptCode: "SENG"
+                        deptShortName: "SENG"
+                        planCode: "B3001"
+                        planName: "Bachelor Degree SENG: 4Y"
+                        stdtTerm:
+                          - termCode: "2410"
+                            termName: "2024-25 Fall"
+                            termPlanCode: "B3001"
+                            termPlanName: "Bachelor Degree SENG: 4Y"
+                            termStudyYear: "01"
+                            termStudyMode: "F"
+                            termFormofStudy: "ENRL"
+                            termFormofStudyName: "Enroll"
+                            termStudyAgreement: " "
+                            termProgStatusCode: "AC"
+                            termProgStatusName: "Active in Program"
+                            termGPA: 0
+                            termCGA: 0
+                            ind12pts: "N"
+                            priorMphil: "Z"
+                            ustPriorMphil: "Z"
+                            termEligResYr: 0
+                            termFTEYr: 0
+                            termCumFTEYr: 0
+                            termTimeLimit: "Z"
 
 components:
   securitySchemes:
