@@ -671,6 +671,7 @@ paths:
                     photo: "/91/..."
                     popupMsg: null
                     inboxMsg: []
+
   /sis/stdt_terms:
     get:
       summary: Get student term information
@@ -759,6 +760,178 @@ paths:
                             termFTEYr: 0
                             termCumFTEYr: 0
                             termTimeLimit: "Z"
+  /msapi/sis/stdt_class_enrl/%7BstdtID%7D:
+    get:
+      summary: Get student class enrollment information
+      tags: # Added tags for better organization
+        - Student
+      parameters:
+        - in: query
+          name: showInstr
+          schema:
+            type: string
+            enum: [Y, N]
+          required: true
+          description: Whether to show instructor information (Y/N)
+      responses:
+        "200":
+          description: Student class enrollment information found
+          content:
+            application/json:
+              examples: # Example response
+                success:
+                  value:
+                    status: "200"
+                    message: "Student class enrollment information found"
+                    errorCode: ""
+                    totalRecord: 10
+                    offset: 0
+                    limit: 1000
+                    stdtID: "0000"
+                    userName: " "
+                    showInstr: "Y"
+                    stdtInfo:
+                      - stdtID: "0000"
+                        acadCareer: "UGRD"
+                        stdtCareerNbr: 0
+                        schoolCode: "SENG"
+                        deptCode: "SENG"
+                        deptShortName: "SENG"
+                        planCode: "B3001"
+                        planName: "Bachelor Degree SENG: 4Y"
+                        studentClassEnrl:
+                          - termCode: "2410"
+                            termName: "2024-25 Fall"
+                            crseId: "007068"
+                            classNbr: 2007
+                            crseCode: "COMP1021"
+                            crseTitle: "Introduction to Computer Science"
+                            crseUnit: "3.00"
+                            classSection: "L01"
+                            classTypeName: "Lecture"
+                            enrlComponent: "Y"
+                            holidaySchedule:
+                              - name: "Day following CHIN Mid-Autumn"
+                                date: "2024-09-18"
+                              - name: "The National Day"
+                                date: "2024-10-01"
+                              - name: "Chung Yeung Festival"
+                                date: "2024-10-11"
+                            studentClassSchedule:
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "L01"
+                                classMtgNbr: 2
+                                facilityId: "2465"
+                                classRoom: "Rm 2465, Lift 25-26 (122)"
+                                classStartDate: "2024-09-02"
+                                classEndDate: "2024-11-30"
+                                classStartTime: "09:00"
+                                classEndTime: "09:50"
+                                mon: "N"
+                                tues: "Y"
+                                wed: "N"
+                                thurs: "Y"
+                                fri: "N"
+                                sat: "N"
+                                sun: "N"
+                            studentFinalExamSchedule:
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "L01"
+                                examSeqNbr: 1
+                                examFacilityId: "NA"
+                                examRoom: "Not Applicable"
+                                examDate: "2024-12-10"
+                                examStartTime: "12:30"
+                                examEndTime: "14:30"
+                                examRemarks: "Final Exam"
+                            studentCourseInstructor:
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "L01"
+                                classMtgNbr: 2
+                                instrName: "ROSSITER, David"
+                                instrEmail: "rossiter@ust.hk"
+                          - termCode: "2410"
+                            termName: "2024-25 Fall"
+                            crseId: "007068"
+                            classNbr: 2037
+                            crseCode: "COMP1021"
+                            crseTitle: "Introduction to Computer Science"
+                            crseUnit: " "
+                            classSection: "LA01"
+                            classTypeName: "Laboratory"
+                            enrlComponent: "N"
+                            holidaySchedule:
+                              - name: "Day following CHIN Mid-Autumn"
+                                date: "2024-09-18"
+                              - name: "The National Day"
+                                date: "2024-10-01"
+                              - name: "Chung Yeung Festival"
+                                date: "2024-10-11"
+                            studentClassSchedule:
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                facilityId: " "
+                                classRoom: "TBA"
+                                classStartDate: "2024-09-02"
+                                classEndDate: "2024-11-30"
+                                classStartTime: "15:00"
+                                classEndTime: "16:50"
+                                mon: "N"
+                                tues: "N"
+                                wed: "Y"
+                                thurs: "N"
+                                fri: "N"
+                                sat: "N"
+                                sun: "N"
+                            studentFinalExamSchedule: []
+                            studentCourseInstructor:
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "CHEUNG, Shing-Chi"
+                                instrEmail: "sccheung@ust.hk"
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "ROSSITER, David"
+                                instrEmail: "rossiter@ust.hk"
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "LUO, Qiong"
+                                instrEmail: "luo@ust.hk"
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "LAM, Ngok"
+                                instrEmail: "lamngok@ust.hk"
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "CHAN, Ki Cecia"
+                                instrEmail: "kccecia@ust.hk"
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "TIAN, Yongqiang"
+                                instrEmail: "yqtian@ust.hk"
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "LAM, Gibson"
+                                instrEmail: "gibson@ust.hk"
 
 components:
   securitySchemes:
