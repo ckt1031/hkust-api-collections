@@ -20,7 +20,163 @@ paths:
             type: string
       responses:
         "200":
-          description: Success
+          description: Student class enrollment information found
+          content:
+            application/json:
+              examples: # Example response
+                success:
+                  value:
+                    status: "200"
+                    message: "Student class enrollment information found"
+                    errorCode: ""
+                    totalRecord: 10
+                    offset: 0
+                    limit: 1000
+                    stdtID: "0000"
+                    userName: " "
+                    showInstr: "Y"
+                    stdtInfo:
+                      - stdtID: "0000"
+                        acadCareer: "UGRD"
+                        stdtCareerNbr: 0
+                        schoolCode: "SENG"
+                        deptCode: "SENG"
+                        deptShortName: "SENG"
+                        planCode: "B3001"
+                        planName: "Bachelor Degree SENG: 4Y"
+                        studentClassEnrl:
+                          - termCode: "2410"
+                            termName: "2024-25 Fall"
+                            crseId: "007068"
+                            classNbr: 2007
+                            crseCode: "COMP1021"
+                            crseTitle: "Introduction to Computer Science"
+                            crseUnit: "3.00"
+                            classSection: "L01"
+                            classTypeName: "Lecture"
+                            enrlComponent: "Y"
+                            holidaySchedule:
+                              - name: "Day following CHIN Mid-Autumn"
+                                date: "2024-09-18"
+                              - name: "The National Day"
+                                date: "2024-10-01"
+                              - name: "Chung Yeung Festival"
+                                date: "2024-10-11"
+                            studentClassSchedule:
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "L01"
+                                classMtgNbr: 2
+                                facilityId: "2465"
+                                classRoom: "Rm 2465, Lift 25-26 (122)"
+                                classStartDate: "2024-09-02"
+                                classEndDate: "2024-11-30"
+                                classStartTime: "09:00"
+                                classEndTime: "09:50"
+                                mon: "N"
+                                tues: "Y"
+                                wed: "N"
+                                thurs: "Y"
+                                fri: "N"
+                                sat: "N"
+                                sun: "N"
+                            studentFinalExamSchedule:
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "L01"
+                                examSeqNbr: 1
+                                examFacilityId: "NA"
+                                examRoom: "Not Applicable"
+                                examDate: "2024-12-10"
+                                examStartTime: "12:30"
+                                examEndTime: "14:30"
+                                examRemarks: "Final Exam"
+                            studentCourseInstructor:
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "L01"
+                                classMtgNbr: 2
+                                instrName: "ROSSITER, David"
+                                instrEmail: "rossiter@ust.hk"
+                          - termCode: "2410"
+                            termName: "2024-25 Fall"
+                            crseId: "007068"
+                            classNbr: 2037
+                            crseCode: "COMP1021"
+                            crseTitle: "Introduction to Computer Science"
+                            crseUnit: " "
+                            classSection: "LA01"
+                            classTypeName: "Laboratory"
+                            enrlComponent: "N"
+                            holidaySchedule:
+                              - name: "Day following CHIN Mid-Autumn"
+                                date: "2024-09-18"
+                              - name: "The National Day"
+                                date: "2024-10-01"
+                              - name: "Chung Yeung Festival"
+                                date: "2024-10-11"
+                            studentClassSchedule:
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                facilityId: " "
+                                classRoom: "TBA"
+                                classStartDate: "2024-09-02"
+                                classEndDate: "2024-11-30"
+                                classStartTime: "15:00"
+                                classEndTime: "16:50"
+                                mon: "N"
+                                tues: "N"
+                                wed: "Y"
+                                thurs: "N"
+                                fri: "N"
+                                sat: "N"
+                                sun: "N"
+                            studentFinalExamSchedule: []
+                            studentCourseInstructor:
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "CHEUNG, Shing-Chi"
+                                instrEmail: "sccheung@ust.hk"
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "ROSSITER, David"
+                                instrEmail: "rossiter@ust.hk"
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "LUO, Qiong"
+                                instrEmail: "luo@ust.hk"
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "LAM, Ngok"
+                                instrEmail: "lamngok@ust.hk"
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "CHAN, Ki Cecia"
+                                instrEmail: "kccecia@ust.hk"
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "TIAN, Yongqiang"
+                                instrEmail: "yqtian@ust.hk"
+                              - termCode: "2410"
+                                crseCode: "COMP1021"
+                                classSection: "LA01"
+                                classMtgNbr: 2
+                                instrName: "LAM, Gibson"
+                                instrEmail: "gibson@ust.hk"
 
   /fbs/bookingInfo:
     get:
@@ -58,7 +214,44 @@ paths:
             default: "01"
       responses:
         "200":
-          description: Success
+          description: Facility type info found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  message: { type: string }
+                  errorCode: { type: string }
+                  totalRecord: { type: integer }
+                  userType: { type: string }
+                  ustID: { type: string }
+                  emailAddr: { type: string }
+                  facilityTypeID: { type: string }
+                  facilityType:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        facilityTypeID: { type: string }
+                        facilityTypeName: { type: string }
+                        facilityID: { type: string }
+              examples: # Examples at the MediaType level
+                facilityTypeFound:
+                  value:
+                    status: "200"
+                    message: "Facility type info found"
+                    errorCode: ""
+                    totalRecord: 71
+                    userType: "01"
+                    ustID: "0000"
+                    emailAddr: " "
+                    facilityTypeID: " "
+                    facilityType:
+                      - facilityTypeID: "16"
+                        facilityTypeName: "Artificial-turf Soccer Pitch"
+                        facilityID: "40"
+                      # Add more example facility types here as needed
 
   /fbs/facilities:
     get:
