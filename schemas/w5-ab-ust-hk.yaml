@@ -125,13 +125,41 @@ paths:
                           type: array
                           items:
                             type: object
+                            properties:
+                              classNbr:
+                                type: integer
+                              subject:
+                                type: string
+                              catalogNbr:
+                                type: string
+                              crseCode:
+                                type: string
+                              crseId:
+                                type: string
+                              section:
+                                type: string
+                              relClassNbr1:
+                                type: integer
+                              relClassNbr2:
+                                type: integer
               example:
                 status: "200"
                 message: ""
                 terms:
                   - term: "2410"
                     termDesc: "2024-25 Fall"
-                    enrollments: []
+                    enrollments: [
+                      {
+                          "classNbr": 1012,
+                          "subject": "COMP",
+                          "catalogNbr": "1029J",
+                          "crseCode": "COMP1029J",
+                          "crseId": "007983",
+                          "section": "L1",
+                          "relClassNbr1": 1013,
+                          "relClassNbr2": 0
+                      }
+                    ]
 
   /token/request:
     post:
