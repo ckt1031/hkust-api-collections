@@ -20,6 +20,197 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  status:
+                    type: string
+                    examples:
+                      - "success"
+                  data:
+                    type: object
+                    properties:
+                      category:
+                        type: string
+                        examples:
+                          - "LIBRARY"
+                      areas:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              examples:
+                                - "3"
+                            area_name:
+                              type: string
+                              examples:
+                                - "Group Study Rooms"
+                            open_time:
+                              type: string
+                              examples:
+                                - "08:00"
+                            close_time:
+                              type: string
+                              examples:
+                                - "22:30"
+                            area_sort_order:
+                              type: integer
+                              examples:
+                                - 1
+                            calendar_link:
+                              type: string
+                              format: uri
+                              examples:
+                                - "https://lbbooking.hkust.edu.hk/calendar/week.php?area=3"
+                            rooms:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    examples:
+                                      - "11"
+                                  room_name:
+                                    type: string
+                                    examples:
+                                      - "1-352"
+                                  capacity:
+                                    type: string
+                                    examples:
+                                      - "8"
+                                  custom_html:
+                                    type: string
+                                    format: uri
+                                    examples:
+                                      - "http://library.ust.hk/map/1352"
+                                  room_sort_order:
+                                    type: integer
+                                    examples:
+                                      - 3
+                                  bookable_class:
+                                    type: string
+                                    examples:
+                                      - "|POSTGRADUATE|RESEARCH POSTGRADUATE|TAUGHT POSTGRADUATE|UNDERGRADUATE|"
+                                  calendar_link:
+                                    type: string
+                                    format: uri
+                                    examples:
+                                      - "https://lbbooking.hkust.edu.hk/calendar/week.php?room=11"
+
+  /getSessionsByDay:
+    get:
+      security: []
+      summary: Get library room availability for specific day
+      parameters:
+        - name: area
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: month
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: day
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    examples:
+                      - "success"
+                  data:
+                    type: object
+                    properties:
+                      rooms:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              examples:
+                                - "11"
+                            room_name:
+                              type: string
+                              examples:
+                                - "1-352"
+                            capacity:
+                              type: string
+                              examples:
+                                - "8"
+                            custom_html:
+                              type: string
+                              format: uri
+                              examples:
+                                - "http://library.ust.hk/map/1352"
+                            booking_link:
+                              type: string
+                              format: uri
+                              examples:
+                                - "https://lbbooking.hkust.edu.hk/calendar/week.php?year=2024&month=12&day=6&room=11&area=3"
+                            calendar_link:
+                              type: string
+                              format: uri
+                              examples:
+                                - "https://lbbooking.hkust.edu.hk/calendar/week.php?year=2024&month=12&day=6&room=11&area=3"
+                            start_date:
+                              type: string
+                              examples:
+                                - "20241206"
+                            end_date:
+                              type: string
+                              examples:
+                                - "20241206"
+                            sessions:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  start_time:
+                                    type: integer
+                                    examples:
+                                      - 1733414400
+                                  start_time_YYYYMMDD:
+                                    type: string
+                                    examples:
+                                      - "20241206"
+                                  start_time_hhmm:
+                                    type: string
+                                    examples:
+                                      - "00:00"
+                                  end_time:
+                                    type: integer
+                                    examples:
+                                      - 1733443200
+                                  end_time_YYYYMMDD:
+                                    type: string
+                                    examples:
+                                      - "20241206"
+                                  end_time_hhmm:
+                                    type: string
+                                    examples:
+                                      - "08:00"
+                                  status:
+                                    type: string
+                                    examples:
+                                      - "closed"
 
   /entry:
     post:
@@ -82,41 +273,117 @@ paths:
         "200":
           description: Success
 
-  /getSessionsByDay:
-    get:
-      security: []
-      summary: Get library room availability for specific day
-      parameters:
-        - name: area
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: year
-          in: query
-          required: true
-          schema:
-            type: integer
-        - name: month
-          in: query
-          required: true
-          schema:
-            type: integer
-        - name: day
-          in: query
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: Success
-
   /getMySchedule:
     get:
       summary: Get personal library room bookings
       responses:
         "200":
           description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    examples:
+                      - "success"
+                  data:
+                    type: object
+                    properties:
+                      numEntry:
+                        type: integer
+                        examples:
+                          - 1
+                      bookings:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              examples:
+                                - "1980642"
+                            name:
+                              type: string
+                              examples:
+                                - "CHAN Ka Tsun"
+                            room_id:
+                              type: string
+                              examples:
+                                - "45"
+                            start_time:
+                              type: string
+                              examples:
+                                - "1733805000"
+                            end_time:
+                              type: string
+                              examples:
+                                - "1733812200"
+                            type:
+                              type: string
+                              examples:
+                                - "U"
+                            create_by:
+                              type: string
+                              examples:
+                                - "ktchanbb"
+                            description:
+                              type: string
+                              examples:
+                                - null
+                            ical_uid:
+                              type: string
+                              examples:
+                                - "MRBS-6747d578bb5f4-0c836be9@lbbooking.hkust.edu.hk"
+                            userclass:
+                              type: string
+                              examples:
+                                - "UNDERGRADUATE"
+                            start_time_YYYYMMDD:
+                              type: string
+                              examples:
+                                - "20241210"
+                            start_time_hhmm:
+                              type: string
+                              examples:
+                                - "1230"
+                            end_time_YYYYMMDD:
+                              type: string
+                              examples:
+                                - "20241210"
+                            end_time_hhmm:
+                              type: string
+                              examples:
+                                - "1430"
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                          examples: 
+                            - []
+              examples:
+                successResponse:
+                  value:
+                    status: "success"
+                    data:
+                      numEntry: 1
+                      bookings:
+                        - id: "12345678"
+                          name: "CHAN XX XXXX"
+                          room_id: "00"
+                          start_time: "1733805000"
+                          end_time: "1733812200"
+                          type: "U"
+                          create_by: "USERNAME"
+                          description: null
+                          ical_uid: "XXXX-xxxx-xxxx@lbbooking.hkust.edu.hk"
+                          userclass: "UNDERGRADUATE"
+                          start_time_YYYYMMDD: "20241001"
+                          start_time_hhmm: "1230"
+                          end_time_YYYYMMDD: "20241001"
+                          end_time_hhmm: "1430"
+                      errors: []
 
 components:
   securitySchemes:
